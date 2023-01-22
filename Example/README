@@ -1,0 +1,18 @@
+This directory contains examples using System V IPC message queues 
+and Unix pipes/fork system calls.  
+
+
+ex-pipe.c	C program that shows pipes created.  A fork call is used
+		by a parent process to create a child process.  The parent
+		and child processes exchange 3 messages.
+
+msg-server.c	C program that creates an IPC message queue, and then waits
+		for a message from the msg-client program.  Once a message 
+		has been received, it sends a message to the client program.
+		Then, it "cleans up" the IPC message queue.  The msg-server 
+		program must be started before the msg-client program since 
+		the message queue must be created before the msg-client uses it.
+
+msg-client.c	C program that uses a message queue created by a different
+		program (the msg-server program).  It sends a message to the
+		msg-server and waits for a message from it.
