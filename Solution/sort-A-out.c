@@ -12,15 +12,14 @@
 
 struct msgform {
 	long	mtype;
-	char	mtext[256];
-    int numbers[16];
+    	int numbers[16];
 } msg;
 
 int	msgid;
 
 int main()
 {
-	int i, pid, *pint, n;
+	int i, pid, n;
 	extern void cleanup();
 
 	/* in case any signal arrives (such as ^C) */
@@ -30,20 +29,19 @@ int main()
 
 	msgid = msgget(MSGKEY, 0777|IPC_CREAT);
 
-	msgrcv(msgid, &msg, 256, 1, 0);
-	pint = (int *) msg.mtext;
-	pid = *pint;
+	msgrcv(msgid, &msg, 64, 1, 0);
 	printf("server: receive from pid %d\n", pid);
 
     n = 16;
+
+    printf("Sorted Array: ");
 
     for (int i=0; i<n; i++)
     {
         printf("%d ", msg.numbers[i]);
     }
 
-	msg.mtype = pid;
-	*pint = getpid();
+
 	msgsnd(msgid, &msg, sizeof(int)*16, 0);
 	sleep(1);
 	cleanup();
