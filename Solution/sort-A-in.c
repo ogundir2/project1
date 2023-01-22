@@ -37,9 +37,10 @@ int main()
         scanf("%d", &msg.numbers[i]);
     }
 
+	
     for (int i=0; i<n; i++)
     {
-        printf("%d ", &msg.numbers[i]);
+        printf("%d ", msg.numbers[i]);
     }
 
 	msgsnd(msgid, &msg, sizeof(int)*16, 0);
