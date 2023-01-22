@@ -43,11 +43,27 @@ int main()
         printf("%d ", msg.numbers[i]);
     }
 
+    int num, next;
+
+    for (int i=0; i<n; i++)
+    {
+        for (int j=0, j < n-i-1; j++)
+        {
+            num = msg.numbers[j];
+            next = msg.numbers[j+1]
+            if (num > next)
+            {
+                &msg.numbers[j] = next;
+                &msg.numbers[j+1] = num;
+            }
+        }
+    }
+
 	msgsnd(msgid, &msg, sizeof(int)*16, 0);
 		/* pid is used as the msg type below */
 	if (msgrcv(msgid, &msg, 256, pid, 0) == -1) {
-		printf("client: msg queue has been removed.\n");
+		printf("\nclient: msg queue has been removed.\n");
 		exit(1);
 	}
-	printf("client: receive from pid %d\n", *pint);
+	printf("\nclient: receive from pid %d\n", *pint);
 }

@@ -39,7 +39,7 @@ int main()
 
     for (int i=0; i<n; i++)
     {
-        printf("%d ", &msg.numbers[i]);
+        printf("%d ", msg.numbers[i]);
     }
 
 	msg.mtype = pid;
