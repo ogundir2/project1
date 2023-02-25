@@ -8,5 +8,8 @@ sort-A-out:  sort-A-out.c
 sort-A-in:  sort-A-in.c
 	cc sort-A-in.c -o sort-A-in
 
+sort-B-in: sort-B-in.c
+	cc sort-B-in.c -o sort-B-in	
+
 clean: 
 	rm sort-A-out sort-A-in
