@@ -1,6 +1,6 @@
 all:	message
 
-message:  sort-A-out sort-A-in
+message:  sort-A-out sort-A-in sort-B-in
 
 sort-A-out:  sort-A-out.c
 	cc sort-A-out.c -o sort-A-out
