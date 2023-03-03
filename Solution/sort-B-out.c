@@ -8,7 +8,7 @@
 #include <sys/msg.h>
 #include <signal.h>
 
-#define MSGKEY	1101
+#define MSGKEY	1102
 #define ROWS 4
 #define COLS 4
 
@@ -36,7 +36,7 @@ int main()
 
 
 	// Print the sorted array
-    printf("Sorted Array: ");
+    printf("Sorted Array:\n ");
     for (i = 0; i < ROWS; i++) {
         for (j = 0; j < COLS; j++) {
             printf("%d ", msg.numbers[i][j]);

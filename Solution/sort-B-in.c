@@ -11,7 +11,7 @@
 #include <sys/ipc.h>
 #include <sys/msg.h>
 
-#define MSGKEY 	1101	
+#define MSGKEY 	1102	
 #define ROWS 4
 #define COLS 4
 
@@ -81,12 +81,14 @@ int main()
     }
 	
     // Print the original array
+	printf("Original Array:\n");
     for (i = 0; i < ROWS; i++) {
         for (j = 0; j < COLS; j++) {
             printf("%d ", msg.numbers[i][j]);
         }
 	printf("\n");
     }
+	printf("\n");
 
 
 	msgsnd(msgid, &msg, sizeof(int)*16, 0);
