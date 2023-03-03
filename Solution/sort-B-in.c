@@ -96,9 +96,7 @@ int main()
         if (pipe(fds[i]) == -1) {
             perror("pipe");
             exit(EXIT_FAILURE);
-        } else {
-            printf("pipe %d created\n", i);
-        }
+	}
     }
 
     int arr[4];
@@ -126,18 +124,32 @@ int main()
         if (pid == 0) {
             if (phase % 2 == 0) {   // Even phase
                 bubblesort_ascending(arr);
+		int ind = i/2;
+		for (int m=0; m < ROWS; m++)
+		{
+			msg.numbers[m][ind] = arr[m];
+		}
             } else {    // Odd phase
                 if (i %2 == 0) {
                     bubblesort_ascending(arr);
+			int ind = i/2;
+			for (int m=0; m<COLS; m++) {
+				msg.numbers[ind][m] = arr[m];
+			}
                 } else {
                     bubblesort_descending(arr);
+			int ind = i/2;
+			for (int m=0; m <COLS; m++) {
+				msg.numbers[ind][m] = arr[m];
+			}
                 }
             }
 
-            write(fds[i][0], arr, sizeof(arr));
+            write(fds[i][1], arr, sizeof(arr));
         } else {
-            read(fds[j*2][1], msg.numbers[j], sizeof(int)*4)
+            read(fds[i][1], msg.numbers[j], sizeof(int)*4);
         }
+
         phase++;
     }
 
