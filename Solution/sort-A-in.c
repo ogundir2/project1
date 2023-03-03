@@ -18,42 +18,6 @@ struct msgform {
 	int	numbers[16];
 };
 
-void bubblesort_ascending(int arr[4]) {
-    int num, next;
-
-    for (int i=0; i<n; i++)
-    {
-        for (int j=0; j<n-i-1; j++)
-        {
-            num = arr[j];
-            next = arr[j+1];
-            if (num > next)
-            {
-                arr[j] = next;
-                arr[j+1] = num;
-            }
-        }
-    }
-}
-
-void bubblesort_descending(int arr[4]) {
-    int num, next;
-
-    for (int i=0; i<n; i++)
-    {
-        for (int j=0; j<n-i-1; j++)
-        {
-            num = arr[j];
-            next = arr[j+1];
-            if (num < next)
-            {
-                arr[j] = next;
-                arr[j+1] = num;
-            }
-        }
-    }
-}
-
 int main()
 {
 	struct msgform msg;
