@@ -32,7 +32,6 @@ int main()
 
 	msg.mtype = 1;
 
-    // int arr[ROWS][COLS];
     int i, j;
 
     // Read integers into a 2D array
@@ -48,7 +47,7 @@ int main()
     // Print the original array
     for (i = 0; i < ROWS; i++) {
         for (j = 0; j < COLS; j++) {
-            printf("%d", msg.numbers[i][j]);
+            printf("%d ", msg.numbers[i][j]);
         }
 	printf("\n");
     }

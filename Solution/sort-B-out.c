@@ -9,17 +9,19 @@
 #include <signal.h>
 
 #define MSGKEY	1101
+#define ROWS 4
+#define COLS 4
 
 struct msgform {
 	long	mtype;
-    	int numbers[16];
+    int numbers[ROWS][COLS];
 } msg;
 
 int	msgid;
 
 int main()
 {
-	int i, pid, n;
+	int i, j, pid, n;
 	extern void cleanup();
 
 	/* in case any signal arrives (such as ^C) */
@@ -32,13 +34,14 @@ int main()
 	msgrcv(msgid, &msg, 64, 1, 0);
 	printf("server: receive from pid %d\n", pid);
 
-    n = 16;
 
+	// Print the sorted array
     printf("Sorted Array: ");
-
-    for (int i=0; i<n; i++)
-    {
-        printf("%d ", msg.numbers[i]);
+    for (i = 0; i < ROWS; i++) {
+        for (j = 0; j < COLS; j++) {
+            printf("%d ", msg.numbers[i][j]);
+        }
+	printf("\n");
     }
 
 
