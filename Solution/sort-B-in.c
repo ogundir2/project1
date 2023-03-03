@@ -61,10 +61,11 @@ int main()
 	struct msgform msg;
 	int msgid, pid, *pint, n;
     	n = 16;
+    int fds[8][2];
 
 	msgid = msgget(MSGKEY, 0777);
 
-	pid = getpid();
+	// pid = getpid();
 
 	msg.mtype = 1;
 
@@ -90,6 +91,55 @@ int main()
     }
 	printf("\n");
 
+
+    for (i=0; i<8; i++) {
+        if (pipe(fds[i]) == -1) {
+            perror("pipe");
+            exit(EXIT_FAILURE);
+        } else {
+            printf("pipe %d created\n", i);
+        }
+    }
+
+    int arr[4];
+
+    for (i=0; i<8; i++) {
+        pid = fork();
+        if (pid == 0) { // Child process
+            if (i%2 == 0) {
+                read(fds[i][0], arr, sizeof(arr));
+            }
+            break;
+        } else if (pid > 0) {   // Parent process
+            if (i%2 == 0) {
+                for (j=0; j < 4; j++) {
+                    write(fds[j*2][1], msg.numbers[j], sizeof(int)*4);
+                }
+            }
+        }
+    }
+
+    int phase = 1;
+
+    while (phase < 5) {
+
+        if (pid == 0) {
+            if (phase % 2 == 0) {   // Even phase
+                bubblesort_ascending(arr);
+            } else {    // Odd phase
+                if (i %2 == 0) {
+                    bubblesort_ascending(arr);
+                } else {
+                    bubblesort_descending(arr);
+                }
+            }
+
+            write(fds[i][0], arr, sizeof(arr));
+        } else {
+            read(fds[j*2][1], msg.numbers[j], sizeof(int)*4)
+        }
+        phase++;
+    }
 
 	msgsnd(msgid, &msg, sizeof(int)*16, 0);
 		/* pid is used as the msg type below */
